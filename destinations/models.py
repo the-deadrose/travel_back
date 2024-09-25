@@ -25,6 +25,18 @@ class DestinationImage(models.Model):
 
     def __str__(self):
         return f"Image for {self.destination.name}"
+    
+
+
+# welcome page destination model
+class WelcomeDestination(models.Model):
+    title = models.CharField(max_length=255, unique=True)
+    subtitle = models.CharField(max_length=255)
+    description = models.TextField()
+    image = models.ImageField(upload_to='welcome_destination_images/')
+
+    def __str__(self):
+        return self.title
 
 # class Review(models.Model):
 #     destination = models.ForeignKey(Destination, related_name='reviews', on_delete=models.CASCADE)
