@@ -1,7 +1,7 @@
 
 
 from rest_framework import serializers
-from destinations.models import Destination, DestinationImage
+from destinations.models import Destination, DestinationImage, WelcomeDestination
 
 
 class DestinationImageSerializer(serializers.ModelSerializer):
@@ -17,3 +17,8 @@ class DestinationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Destination
         fields = ['id', 'name', 'description', 'location', 'latitude', 'longitude', 'average_rating', 'created_at', 'updated_at', 'images']
+
+class WelcomeDestinationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = WelcomeDestination
+        fields = '__all__'
