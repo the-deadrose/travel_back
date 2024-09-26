@@ -55,4 +55,9 @@ class WelcomeDestinationView(ListAPIView):
 
 
 
-        
+class InspirationDestinationView(ListAPIView):
+    serializer_class = DestinationListSerializer
+
+    def get_queryset(self):
+        queryset = Destination.objects.order_by('?')[:5]
+        return queryset
