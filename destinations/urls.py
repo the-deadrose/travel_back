@@ -1,6 +1,6 @@
  
 from django.urls import path
-from destinations.views import DestinationListAPIView, DestinationListCreateAPIView, InspirationDestinationView, PopularDestinationsView, WelcomeDestinationView
+from destinations.views import DestinationDetailAPIView, DestinationListAPIView, DestinationListCreateAPIView, InspirationDestinationView, PopularDestinationsView, WelcomeDestinationView
 
 
 
@@ -10,5 +10,6 @@ urlpatterns = [
     path('create/', DestinationListCreateAPIView.as_view(), name='create'),
     path('popular/', PopularDestinationsView.as_view(), name='popular'),
     path('welcome/', WelcomeDestinationView.as_view(), name='welcome'),
-    path ('inspiration/', InspirationDestinationView.as_view(), name='inspiration')
+    path ('inspiration/', InspirationDestinationView.as_view(), name='inspiration'),
+    path('detail/<int:pk>/', DestinationDetailAPIView.as_view(), name='detail'),
 ]

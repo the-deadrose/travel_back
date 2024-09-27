@@ -49,3 +49,17 @@ class WelcomeDestinationSerializer(serializers.ModelSerializer):
     class Meta:
         model = WelcomeDestination
         fields = '__all__'
+
+
+class DestinationDetailSerializer(serializers.ModelSerializer):
+    images = DestinationImageSerializer(many=True, required=True)
+
+    class Meta:
+        model = Destination
+        fields = ['id', 'name', 'description', 'location', 'latitude', 'longitude', 'average_rating', 'created_at', 'updated_at', 'images']    
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation['average_rating'] = float(instance.average_rating)
+        representation['images'] = [image.image.url for image in instance.images.all()]
+        return representation
