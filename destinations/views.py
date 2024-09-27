@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from destinations.models import Destination, DestinationImage, WelcomeDestination
-from destinations.serializers import DestinationCreateSerializer, DestinationListSerializer, WelcomeDestinationSerializer
+from destinations.serializers import DestinationCreateSerializer, DestinationDetailSerializer, DestinationListSerializer, WelcomeDestinationSerializer
 from travel_back.pagination import CustomPagination
 from rest_framework.generics import ListAPIView 
 from rest_framework.response import Response
@@ -61,3 +61,20 @@ class InspirationDestinationView(ListAPIView):
     def get_queryset(self):
         queryset = Destination.objects.order_by('?')[:5]
         return queryset
+    
+
+
+class DestinationDetailAPIView(generics.RetrieveAPIView):
+    queryset = Destination.objects.all()
+    serializer_class = DestinationDetailSerializer
+    
+
+    def get(self, request, *args, **kwargs):
+        destination = self.get_object()
+        serializer = self.get_serializer(destination)
+        return Response(serializer.data)
+    
+
+
+    
+
